@@ -19,7 +19,7 @@
         </tr>
         <?php
         //取出資料表的所有資料
-        $rows=all($useTable);
+        $rows=all($useTable, ['parent'=>0]);
 
         //以迴圈的方式逐筆列出資料
         foreach($rows as $r){
@@ -32,6 +32,7 @@
             <input type="text" name="href[]" value="<?=$r['href'];?>">
           </td>
           <td>
+            <?=nums( $useTable, ["parent"=>$r["id"]])?>
           </td>
           <td>
             <!--checkbox是多選的機制，因此name的屬性需要使用陣列的型式-->

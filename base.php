@@ -1,8 +1,8 @@
 <?php 
 
 //建立PDO
-$dsn="mysql:host=localhost;charset=utf8;dbname=db01";
-$pdo=new PDO($dsn,"root","");
+$dsn="mysql:host=localhost;charset=utf8;dbname=db111";
+$pdo=new PDO($dsn,"root","123");
 
 //啟用session
 session_start();

@@ -1,4 +1,4 @@
-<h3 class="cent">新增管理者帳號</h3>
+<h3 class="cent">新增主選單</h3>
 <hr>
 <form action="./api/add.php" method="post" enctype="multipart/form-data" style="width:60%;margin:auto">
 <table>
