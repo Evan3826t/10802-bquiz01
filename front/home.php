@@ -3,9 +3,47 @@
   <?php include "marquee.php";?>
   <div style="height:32px; display:block;"></div>
   <!--正中央-->
-  <script>
+  
+  <div style="width:100%; padding:2px; height:290px;">
+    <div id="mwww" loop="true" style="width:100%; height:100%;">
+      <div style="width:99%; height:100%; position:relative;" class="cent">沒有資料</div>
+    </div>
+  </div>
+  <div
+    style="width:95%; padding:2px; height:190px; margin-top:10px; padding:5px 10px 5px 10px; border:#0C3 dashed 3px; position:relative;">
+    <span class="t botli">最新消息區
+    <?php
+      $nums = nums("news", ["sh"=>1]);
+      if( $nums > 5){
+        echo "<a href='index.php?do=news' style='float:right'>more....</a>";
+      }
+    ?>
+    </span>
+    <ul class="ssaa" style="list-style-type:decimal;">
+      <?php
+
+        $rows = all( "news", ["sh"=> 1],"limit 5");
+        foreach( $rows as $r){
+          echo "<li>" . mb_substr( $r['text'], 0 , 30, "utf8");
+          echo "<span class='all' style='display:none'>" . $r['text']."</span>";
+        }
+
+      ?>
+    </ul>
+    <div id="altt"
+      style="position: absolute; width: 350px; min-height: 100px; background-color: rgb(255, 255, 204); top: 50px; left: 130px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;">
+    </div>
+    <script>
     var lin = new Array();
+    lin = [<?php
+          $mvim = all( "mvim", ["sh"=>1]);
+          foreach( $mvim as $m){
+            echo "'./img/" . $m['file'] . "',";
+          };
+          ?>];
     var now = 0;
+    ww();
+
     if (lin.length > 1) {
       setInterval("ww()", 3000);
       now = 1;
@@ -19,20 +57,6 @@
         now = 0;
     }
   </script>
-  <div style="width:100%; padding:2px; height:290px;">
-    <div id="mwww" loop="true" style="width:100%; height:100%;">
-      <div style="width:99%; height:100%; position:relative;" class="cent">沒有資料</div>
-    </div>
-  </div>
-  <div
-    style="width:95%; padding:2px; height:190px; margin-top:10px; padding:5px 10px 5px 10px; border:#0C3 dashed 3px; position:relative;">
-    <span class="t botli">最新消息區
-    </span>
-    <ul class="ssaa" style="list-style-type:decimal;">
-    </ul>
-    <div id="altt"
-      style="position: absolute; width: 350px; min-height: 100px; background-color: rgb(255, 255, 204); top: 50px; left: 130px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;">
-    </div>
     <script>
       $(".ssaa li").hover(
         function () {

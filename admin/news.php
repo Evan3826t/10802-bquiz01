@@ -15,8 +15,17 @@
           <td width="10%">刪除</td>
         </tr>
         <?php
+        $total = nums( $useTable);
+        // 分頁
+        $div = 4;
+        // 總頁數
+        $pages = ceil( $total / $div);
+        $now = ( !empty( $_GET['p']))?$_GET['p']:1;
+        $start = ( $now-1)*$div;
+
+
         //取出資料表的所有資料
-        $rows=all($useTable);
+        $rows = all( $useTable, [], "limit $start, $div");
 
         //以迴圈的方式逐筆列出資料
         foreach($rows as $r){
@@ -59,6 +68,20 @@
         </tr>
       </tbody>
     </table>
+    <div class="cent">
+<?php
+if( $now>1){
+  echo "<a href='admin.php?do=$useTable&p=" . ($now-1) . "' style='text-decoration:none'> < </a>";
+}
+for( $i=1; $i <= $pages; $i++){
+  $fontSize=( $i== $now)?"24px":"16px";
+  echo "<a href='admin.php?do=$useTable&p=$i' style='font-size:$fontSize; text-decoration:none'> $i </a>";
+}
+if( $now < $pages){
+  echo "<a href='admin.php?do=$useTable&p=" . ($now+1) . "' style='text-decoration:none'> > </a>";
+}
 
+?>
+</div>
   </form>
 </div>

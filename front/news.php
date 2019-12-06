@@ -3,9 +3,46 @@
   <?php include "marquee.php";?>
   <div style="height:32px; display:block;"></div>
   <!--正中央-->
-  <div style="text-align:center;">
-    <a class="bl" style="font-size:30px;" href="?do=meg&p=0">&lt;&nbsp;</a>
-    <a class="bl" style="font-size:30px;" href="?do=meg&p=0">&nbsp;&gt;</a>
+  <h3>更多最新消息顯示區</h3>
+  <hr>
+  <?php
+    $useTable = "news";
+    $total = nums( $useTable);
+    // 分頁
+    $div = 5;
+    // 總頁數
+    $pages = ceil( $total / $div);
+    $now = ( !empty( $_GET['p']))?$_GET['p']:1;
+    $start = ( $now-1)*$div;
+
+
+    //取出資料表的所有資料
+    $rows = all( $useTable, ["sh"=>1], "limit $start, $div");
+  ?>
+    <ol start="<?=$start+1;?>">
+      <?php
+        foreach( $rows as $r){
+          echo "<li class='sswww'>" . mb_substr( $r['text'], 0 , 30, "utf8");
+          echo "<span class='all' style='display:none'>" . $r['text']."</span>";
+          echo "</li>";
+        }
+      ?>
+  </ol>
+  <div class="cent">
+  <?php
+    if( $now>1){
+      echo "<a href='index.php?do=$useTable&p=" . ($now-1) . "' style='text-decoration:none'> < </a>";
+    }
+    for( $i=1; $i <= $pages; $i++){
+      $fontSize=( $i== $now)?"24px":"16px";
+      echo "<a href='index.php?do=$useTable&p=$i' style='font-size:$fontSize; text-decoration:none'> $i </a>";
+    }
+    if( $now < $pages){
+      echo "<a href='index.php?do=$useTable&p=" . ($now+1) . "' style='text-decoration:none'> > </a>";
+    }
+
+    ?>
+  
   </div>
 </div>
 <div id="alt"

@@ -57,7 +57,7 @@ function find($table,...$arg){
 function all($table,...$arg){
   global $pdo;
 
-  $sql="select * from $table";
+  $sql="select * from $table ";
 
     if(!empty($arg[0])){
 

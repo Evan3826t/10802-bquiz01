@@ -41,34 +41,31 @@
                     if(file_exists($path)){
                       include $path;
                     }else{
-                      include "./admin/home.php";
+                      include "./front/home.php";
                     }
                        
                 ?>
 
-                <div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
-                    	<script>
-						$(".sswww").hover(
-							function ()
-							{
-								$("#alt").html(""+$(this).children(".all").html()+"").css({"top":$(this).offset().top-50})
-								$("#alt").show()
-							}
-						)
-						$(".sswww").mouseout(
-							function()
-							{
-								$("#alt").hide()
-							}
-						)
-                        </script>
+                
                                  <div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
                 	<!--右邊-->   
-                	<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=admin&#39;)">管理登入</button>
+                	<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=login&#39;)">管理登入</button>
                 	<div style="width:89%; height:480px;" class="dbor">
                     	<span class="t botli">校園映象區</span>
-						                        <script>
-                        	var nowpage=0,num=0;
+						<div class="btn" onclick="pp(1)"><img src="./icon/up.jpg" alt=""></div>
+						<?php
+						$image = all( "image", ["sh"=>1]);
+						foreach( $image as $key => $i){
+							echo "<div class='cent im' id='ssaa$key'>";
+
+							echo "<img src='./img/" . $i['file'] . "'style='width:150px;height:103px'>";
+							echo "</div>";
+						}
+
+						?>
+						<div class="btn" onclick="pp(2)"><img src="./icon/dn.jpg" alt=""></div>
+						<script>
+                        	var nowpage = 0,num = 0;
 							function pp(x)
 							{
 								var s,t;
